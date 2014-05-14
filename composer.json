@@ -24,7 +24,6 @@
         "psr-0": { "JLM\\SerializerExpression": "src" }
     },
     "minimum-stability": "dev",
-    "target-dir": "JLM/SerializerExpression",
     "extra": {
         "branch-alias": {
             "dev-master": "0.1-dev"

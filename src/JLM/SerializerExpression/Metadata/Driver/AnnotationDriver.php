@@ -1,11 +1,11 @@
 <?php
 
-namespace JLM\SerializerExpression\Serializer\Metadata\Driver;
+namespace JLM\SerializerExpression\Metadata\Driver;
 
 use Doctrine\Common\Annotations\Reader;
 
-use JLM\SerializerExpression\Serializer\Annotation\ExcludeIf;
-use JLM\SerializerExpression\Serializer\Metadata\PropertyMetadata;
+use JLM\SerializerExpression\Annotation\ExcludeIf;
+use JLM\SerializerExpression\Metadata\PropertyMetadata;
 
 use Metadata\Driver\DriverInterface;
 use Metadata\ClassMetadata;

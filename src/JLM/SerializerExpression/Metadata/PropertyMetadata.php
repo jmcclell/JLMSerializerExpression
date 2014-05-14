@@ -1,6 +1,6 @@
 <?php
 
-namespace JLM\SerializerExpression\Serializer\Metadata;
+namespace JLM\SerializerExpression\Metadata;
 
 use JMS\Serializer\TypeParser;
 use JMS\Serializer\Exception\RuntimeException;

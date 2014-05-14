@@ -1,8 +1,7 @@
 <?php
 
 namespace JLM\SerializerExpression\Tests\Model;
-
-use JLM\SerializerExpression\Serializer\Annotation\ExcludeIf;
+use JLM\SerializerExpression\Annotation\ExcludeIf;
 
 class User
 {

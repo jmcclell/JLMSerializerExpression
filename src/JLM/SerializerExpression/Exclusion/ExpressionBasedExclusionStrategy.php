@@ -1,6 +1,6 @@
 <?php
 
-namespace JLM\SerializerExpression\Serializer\Exclusion;
+namespace JLM\SerializerExpression\Exclusion;
 
 use JMS\Serializer\Exclusion\ExclusionStrategyInterface;
 use JMS\Serializer\Metadata\ClassMetadata;

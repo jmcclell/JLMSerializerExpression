@@ -5,8 +5,8 @@ namespace JLM\SerializerExpression\Tests;
 use JLM\SerializerExpression\Tests\Model\User;
 use JLM\SerializerExpression\Tests\ExpressionLanguage\CustomExpressionLanguage;
 
-use JLM\SerializerExpression\Serializer\Metadata\Driver\AnnotationDriver;
-use JLM\SerializerExpression\Serializer\Exclusion\ExpressionBasedExclusionStrategy;
+use JLM\SerializerExpression\Metadata\Driver\AnnotationDriver;
+use JLM\SerializerExpression\Exclusion\ExpressionBasedExclusionStrategy;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 

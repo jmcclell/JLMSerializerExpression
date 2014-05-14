@@ -1,6 +1,6 @@
 <?php
 
-namespace JLM\SerializerExpression\Serializer\Annotation;
+namespace JLM\SerializerExpression\Annotation;
 
 /**
  * Uses Symfony expressons to determine of the user is authorized

@@ -21,7 +21,7 @@
         "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
-        "psr-0": { "JLM\\SerializerExpression": "src" }
+        "psr-0": { "JLM\\SerializerExpression": "src/" }
     },
     "minimum-stability": "dev",
     "extra": {

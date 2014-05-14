@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b4fcc85ec358c8ad9a5948c7f78ed70b",
+    "hash": "ac3159e9e3ff0d415a8bd6d55f8a5845",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -540,12 +540,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "bccecf50645068b44f49a84009e2a0499a500b99"
+                "reference": "d378da98a21177530fecb378bbb4ab79fab87585"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/bccecf50645068b44f49a84009e2a0499a500b99",
-                "reference": "bccecf50645068b44f49a84009e2a0499a500b99",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/d378da98a21177530fecb378bbb4ab79fab87585",
+                "reference": "d378da98a21177530fecb378bbb4ab79fab87585",
                 "shasum": ""
             },
             "require": {
@@ -597,7 +597,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-04-30 09:01:21"
+            "time": "2014-05-14 14:44:06"
         },
         {
             "name": "phpunit/php-file-iterator",

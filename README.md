@@ -41,8 +41,6 @@ $annotationDriver = new AnnotationDriver($annotationReader);
 $metadataFactory = new MetadataFactory($annotationDriver);
 ```
 
-#### Metadata Cache
-
 To improve performance, it is *strongly* suggested that you enable caching for the metadata factory. File-based cachcing can be achieved as such:
 
 ```php
@@ -81,7 +79,25 @@ class CustomExpressionLanguage extends BaseExpressionLanguage
 ### Full Example
 
 ```php
-$serializer = JMS\Serializer\SerializerBuilder::create()->build();
+use JMS\Metadata\MetadataFactory;
+use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\SerializationContext;
+use Doctrine\Common\Annotations\AnnotationReader;
+use JLM\SerializerExpression\Metadata\Driver\AnnotationDriver;
+
+
+$expressionLang = new CustomExpressionLanguage();
+
+$metadataDriver = new AnnotationDriver($annotationReader);
+$metadataFactory = new MetadataFactory($metadataDriver);
+
+$exclusionStrategy = new ExpressionBasedExclusionStrategy($metadataFactory, $expressionLang);
+
+$serializationContext = SerializationContext::create();
+$serializationContext->addExclusionStrategy($exclusionStrategy);
+
+$serializer = SerializerBuilder::create()->build();
+
 $serializedContent = $serializer->serialize($data, 'json', $serializationContext);
 ```
 

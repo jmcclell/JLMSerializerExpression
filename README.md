@@ -78,7 +78,7 @@ $annotationDriver = new AnnotationDriver($annotationReader);
 $metadataFactory = new MetadataFactory($annotationDriver);
 ```
 
-To improve performance, it is *strongly* suggested that you enable caching for the metadata factory. File-based cachcing can be achieved as such:
+To improve performance, it is *strongly* suggested that you enable caching for the metadata factory. File-based caching can be achieved as such:
 
 ```php
 use Metadata\Cache\FileCache;

@@ -7,7 +7,7 @@
 
 #JLMSerializerExpression
 
-This library adds expression language support to [JMSSerializer](https://github.com/schmittjoh/JMSSerializer) so that individual fields can be hidden based on expressions at runtime via an `@excludeIf` annotation.
+This library adds expression language support to Johannes Schmitt's [Serializer](https://github.com/schmittjoh/Serializer) library so that individual fields can be hidden based on expressions at runtime via an `@excludeIf` annotation.
 
 # Installation
 

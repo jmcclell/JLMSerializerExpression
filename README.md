@@ -29,7 +29,7 @@ The exclusion strategy has two dependencies, an instance of `JMS\Metadata\Metada
 
 ### Annotating Your Objects
 
-The `@excludeIf` accepts an expression that must be processable by the `ExpressionLanguage` instance you pass to the exclusion strategy. In the example below, we are using a dummy `hasAccessIfTrue` expression function that is created in the *Creating the Expression Language* section below. It isn't very useful, naturally. Creating a useful expression language is application-specific and left up to you. To see an example for Symfony applications, check out the [Symfony bundle of this library](http://github.com/jmcclell/JLMSerializerExpressionBundle).
+The `@excludeIf` annotation accepts an expression that must be processable by the `ExpressionLanguage` instance you pass to the exclusion strategy. In the example below, we are using a dummy `hasAccessIfTrue` expression function that is created in the *Creating the Expression Language* section below. It isn't very useful, naturally. Creating a useful expression language is application-specific and left up to you. To see an example for Symfony applications, check out the [Symfony bundle of this library](http://github.com/jmcclell/JLMSerializerExpressionBundle).
 
 ```php
 <?php

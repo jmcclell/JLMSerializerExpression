@@ -23,9 +23,46 @@ This library can be included via Composer by adding the following to your ```com
 
 # Usage
 
-The library provides an exclusion strategy that must be configured and then added to your serialization context.
+The library provides an exclusion strategy that must be configured and then added to your serialization context. Using this serialization context, when you serialize an object it is inspected for `@excludeIf` annotations which are then processed at runtime.
 
 The exclusion strategy has two dependencies, an instance of `JMS\Metadata\MetadataFactory` from Johannes Schmitt's [Metadata](http://github.com/schmittjoh/Metadata) library and an instance of `Symfony\Component\ExpressionLanguage\ExpressionLanguage` which must be extended to provide the functionality you need.
+
+### Annotating Your Objects
+
+The `@excludeIf` accepts an expression that must be processable by the `ExpressionLanguage` instance you pass to the exclusion strategy. In the example below, we are using a dummy `hasAccessIfTrue` expression function that is created in the *Creating the Expression Language* section below. It isn't very useful, naturally. Creating a useful expression language is application-specific and left up to you. To see an example for Symfony applications, check out the [Symfony bundle of this library](http://github.com/jmcclell/JLMSerializerExpressionBundle).
+
+```php
+<?php
+
+use JLM\SerializerExpression\Annotation\ExcludeIf;
+
+class User
+{
+    /**
+     * @ExcludeIf("hasAccessIfTrue(true)")
+     */
+    public $firstName = 'Jason';
+    /**
+     * @ExcludeIf("hasAccessIfTrue(true)")
+     */
+    public $lastName = 'McClellan';
+    /**
+     * @ExcludeIf("hasAccessIfTrue(false)")
+     */
+    public $phone = '555-555-5555';
+    /**
+     * @ExcludeIf("hasAccessIfTrue(false)")
+     */
+    public $address ='New York, NY';
+
+    public $occupation = 'Software';
+}
+```
+
+Given the above annotations, I would expect that if this object were serialized with a `SerializationContext` that included the `ExpressionBasedExclusionStrategy` configured with our custom `ExpressionLanguage`, we would only see 3 fields in the serialized output:
+- first_name
+- last_name
+- occupation
 
 ### Creating the Metadata Factory
 

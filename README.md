@@ -25,7 +25,7 @@ This library can be included via Composer by adding the following to your ```com
 
 The library provides an exclusion strategy that must be configured and then added to your serialization context.
 
-The exclusion strategy has two dependencies, an instance of `JMS\Metadata\MetadataFactory` from Johannes Schmitt's [Metadata](http://github.com/schmittjoh/Metadata) library and an instance of 'Symfony\Component\ExpressionLanguage\ExpressionLanguage` which must be extended to provide the functionality you need.
+The exclusion strategy has two dependencies, an instance of `JMS\Metadata\MetadataFactory` from Johannes Schmitt's [Metadata](http://github.com/schmittjoh/Metadata) library and an instance of `Symfony\Component\ExpressionLanguage\ExpressionLanguage` which must be extended to provide the functionality you need.
 
 ### Creating the Metadata Factory
 

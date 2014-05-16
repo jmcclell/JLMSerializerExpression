@@ -95,7 +95,6 @@ However, here is a quick (and useless) example:
 
 ```php
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage as BaseExpressionLanguage;
-use Symfony\Component\ExpressionLanguage\Expression;
 
 class CustomExpressionLanguage extends BaseExpressionLanguage
 {

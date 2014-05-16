@@ -540,12 +540,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "d378da98a21177530fecb378bbb4ab79fab87585"
+                "reference": "3b62da716f1d106f6257353f1cbc63e24508b598"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/d378da98a21177530fecb378bbb4ab79fab87585",
-                "reference": "d378da98a21177530fecb378bbb4ab79fab87585",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/3b62da716f1d106f6257353f1cbc63e24508b598",
+                "reference": "3b62da716f1d106f6257353f1cbc63e24508b598",
                 "shasum": ""
             },
             "require": {
@@ -597,7 +597,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-05-14 14:44:06"
+            "time": "2014-05-15 04:11:01"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1350,12 +1350,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "838bee3213e2b27e4d9fa5dc13464d8f0a65a73b"
+                "reference": "50be4f30d0a93404e5d62b05fd7294492cf64c4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/838bee3213e2b27e4d9fa5dc13464d8f0a65a73b",
-                "reference": "838bee3213e2b27e4d9fa5dc13464d8f0a65a73b",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/50be4f30d0a93404e5d62b05fd7294492cf64c4f",
+                "reference": "50be4f30d0a93404e5d62b05fd7294492cf64c4f",
                 "shasum": ""
             },
             "require": {
@@ -1398,7 +1398,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-14 06:54:00"
+            "time": "2014-05-15 08:56:35"
         },
         {
             "name": "symfony/event-dispatcher",

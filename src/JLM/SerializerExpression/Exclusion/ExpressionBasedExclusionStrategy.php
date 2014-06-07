@@ -54,7 +54,12 @@ class ExpressionBasedExclusionStrategy implements ExclusionStrategyInterface
         if (null !== $property->class) {
             $classMetadata = $this->metadataFactory->getMetadataForClass($property->class);
             $classMetadata = $classMetadata->classMetadata[$property->class];
-            // Converts the JMS Serializer property metadata into our own property metadata
+            // Converts the JMS Serializer property metadata into our own property metadata            
+            if(!isset($classMetadata->propertyMetadata[$property->name])) {
+                // Virtual Properties appear as properties from JMS but are not real properties and won't be in our meta data
+                // until support is added for them. This fixes errors as a result.
+                return false;
+            }
             $propertyMetadata = $classMetadata->propertyMetadata[$property->name];
       
             if (null !== $propertyMetadata->exclusionExpression) {

@@ -16,7 +16,7 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\ExpressionLanguage\Expression;
 
 /**
- * Exclusion strategy based on Symfony expression langauge component 
+ * Exclusion strategy based on Symfony expression langauge component
  *
  * @author Jason McClellan <jason_mcclellan@jasonmcclellan.io>
  */
@@ -24,6 +24,8 @@ class ExpressionBasedExclusionStrategy implements ExclusionStrategyInterface, Se
 {
     protected $metadataFactory;
     protected $expressionLanguage;
+
+    protected $currentObject;
 
     public function __construct(MetadataFactory $metadataFactory, ExpressionLanguage $expressionLanguage)
     {
@@ -36,12 +38,12 @@ class ExpressionBasedExclusionStrategy implements ExclusionStrategyInterface, Se
      *
      * This class only supports property level exclusion
      *
-     * @param ClassMetadata $metadata The JMS Serializer metadata for the class 
+     * @param ClassMetadata $metadata The JMS Serializer metadata for the class
      *
      * @return boolean
      */
     public function shouldSkipClass(ClassMetadata $class, Context $context)
-    {        
+    {
         return false;
     }
 
@@ -66,17 +68,19 @@ class ExpressionBasedExclusionStrategy implements ExclusionStrategyInterface, Se
                     return (bool)$this->expressionLanguage->evaluate($expression, array(
                         'classMetadata' => $classMetadata,
                         'propertyMetadata' => $propertyMetadata,
+                        'object' => $this->currentObject,
                         'context' => $context));
                 } elseif (null !== $propertyMetadata->inclusionExpression) {
                     $expression = new Expression($propertyMetadata->inclusionExpression);
                     return (bool)!$this->expressionLanguage->evaluate($expression, array(
                         'classMetadata' => $classMetadata,
                         'propertyMetadata' => $propertyMetadata,
+                        'object' => $this->currentObject,
                         'context' => $context));
                 }
             }
-        }        
-        
+        }
+
         return false;
     }
 
@@ -92,12 +96,11 @@ class ExpressionBasedExclusionStrategy implements ExclusionStrategyInterface, Se
      */
     public function onPreSerialize(PreSerializeEvent $event)
     {
-        $object = $event->getObject();
+        $this->currentObject = $object = $event->getObject();
 
         if(!is_object($object)) {
             return;
         }
-
 
         $class = get_class($object);
         $classMetadata = $this->metadataFactory->getMetadataForClass($class);
@@ -129,8 +132,6 @@ class ExpressionBasedExclusionStrategy implements ExclusionStrategyInterface, Se
        return array(
            array('event' => 'serializer.pre_serialize', 'method' => 'onPreSerialize')
        );
-
     }
-
-
 }
+

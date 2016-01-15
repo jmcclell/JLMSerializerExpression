@@ -10,6 +10,7 @@ use JLM\SerializerExpression\Exclusion\ExpressionBasedExclusionStrategy;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 
+use JLM\SerializerExpression\Tests\Model\Nested\Node;
 use JLM\SerializerExpression\Tests\Model\NoneExclusionPolicy;
 use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\Serializer;
@@ -80,5 +81,37 @@ class ExpressionBasedExclusionStrategyTest extends \PHPUnit_Framework_TestCase
         sort($expectedKeys);
 
         $this->assertEquals($expectedKeys, $dataKeys);
+    }
+
+    public function testNestedObjectHasProperObjectContext()
+    {
+        $model = new Node("one.one", [
+            new Node("two.one", [
+                new Node("three.one"),
+                new Node("three.two"),
+            ]),
+            new Node("two.two"),
+            new Node("two.three"),
+       ]);
+
+        $data = $this->serialize($model);
+        $data = json_decode($data, true);
+
+        $expectedData = [
+            'id' => 'one.one',
+            'children' => [
+                [
+                    'id' => 'two.one',
+                    'children' => [
+                        ['id' => 'three.one'],
+                        ['id' => 'three.two'],
+                    ],
+                ],
+                ['id' => 'two.two'],
+                ['id' => 'two.three'],
+            ]
+        ];
+
+        $this->assertEquals($expectedData, $data);
     }
 }

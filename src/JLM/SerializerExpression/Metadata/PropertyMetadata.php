@@ -2,15 +2,23 @@
 
 namespace JLM\SerializerExpression\Metadata;
 
-use JMS\Serializer\TypeParser;
-use JMS\Serializer\Exception\RuntimeException;
-
 use Metadata\PropertyMetadata as BasePropertyMetadata;
 
 
 class PropertyMetadata extends BasePropertyMetadata
 {
     public $exclusionExpression;
+    public $inclusionExpression;
+
+    public function getInclusionExpression()
+    {
+        return $this->inclusionExpression;
+    }
+
+    public function setInclusionExpression($inclusionExpression)
+    {
+        $this->inclusionExpression = $inclusionExpression;
+    }
 
     public function getExclusionExpression()
     {
@@ -25,7 +33,8 @@ class PropertyMetadata extends BasePropertyMetadata
     public function serialize()
     {
         return serialize(array(
-            $this->exclusionExpression,            
+            $this->exclusionExpression,
+            $this->inclusionExpression,
             parent::serialize(),
         ));
     }
@@ -33,7 +42,8 @@ class PropertyMetadata extends BasePropertyMetadata
     public function unserialize($str)
     {
         list(
-            $this->exclusionExpression,            
+            $this->exclusionExpression,
+            $this->inclusionExpression,
             $parentStr
         ) = unserialize($str);
 

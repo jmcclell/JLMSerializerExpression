@@ -2,7 +2,7 @@
 
 namespace JLM\SerializerExpression\Tests;
 
-use JLM\SerializerExpression\Tests\Model\User;
+use JLM\SerializerExpression\Tests\Model\AllExclusionPolicy;
 use JLM\SerializerExpression\Tests\ExpressionLanguage\CustomExpressionLanguage;
 
 use JLM\SerializerExpression\Metadata\Driver\AnnotationDriver;
@@ -10,6 +10,9 @@ use JLM\SerializerExpression\Exclusion\ExpressionBasedExclusionStrategy;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 
+use JLM\SerializerExpression\Tests\Model\NoneExclusionPolicy;
+use JMS\Serializer\EventDispatcher\EventDispatcher;
+use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializationContext;
 
@@ -18,27 +21,64 @@ use Metadata\MetadataFactory;
 
 class ExpressionBasedExclusionStrategyTest extends \PHPUnit_Framework_TestCase
 {
-    public function testExclusion()
+    /**
+     * @var Serializer
+     */
+    protected $serializer;
+    /**
+     * @var SerializationContext
+     */
+    protected $context;
+
+    public function setUp()
     {
-        $user = new User();
+
         $expressionLang = new CustomExpressionLanguage();
         $annotationReader = new AnnotationReader();
         $metadataDriver = new AnnotationDriver($annotationReader);
         $metadataFactory = new MetadataFactory($metadataDriver);
         $exclusionStrategy = new ExpressionBasedExclusionStrategy($metadataFactory, $expressionLang);
-
-        $serializer = SerializerBuilder::create()->build();
-
+        $this->serializer = SerializerBuilder::create()
+            ->configureListeners(function(EventDispatcher $dispatcher) use ($exclusionStrategy) {
+                    $dispatcher->addSubscriber($exclusionStrategy);
+                })
+            ->build();
         $context = SerializationContext::create();
         $context->addExclusionStrategy($exclusionStrategy);
-        $data = $serializer->serialize($user, 'json', $context);
+        $this->context = $context;
+    }
 
-        $check = json_decode($data, true);
+    protected function serialize($data)
+    {
+        return $this->serializer->serialize($data, 'json', $this->context);
+    }
 
-        $this->assertEquals(3, count($check));
-        foreach (array_keys($check) as $key) {
-            $this->assertTrue(in_array($key, array('first_name', 'last_name', 'occupation')));
-        }
+    public function testAllExclusionPolicy()
+    {
+        $model = new AllExclusionPolicy();
+
+        $data = $this->serialize($model);
+        $data = json_decode($data, true);
+
+        $dataKeys = array_keys($data);
+        sort($dataKeys);
+        $expectedKeys = ['a', 'f', 'g', 'h', 'i', 'aa', 'cc', 'dd', 'ee'];
+        sort($expectedKeys);
+
+        $this->assertEquals($expectedKeys, $dataKeys);
+    }
+
+    public function testNoneExclusionPolicy()
+    {
+        $model = new NoneExclusionPolicy();
+        $data = $this->serialize($model);
+        $data = json_decode($data, true);
+
+        $dataKeys = array_keys($data);
+        sort($dataKeys);
+        $expectedKeys = ['b', 'c', 'd', 'e', 'bb', 'cc', 'dd', 'ee'];
+        sort($expectedKeys);
+
+        $this->assertEquals($expectedKeys, $dataKeys);
     }
 }
-?>
